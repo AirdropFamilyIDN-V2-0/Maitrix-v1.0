@@ -73,5 +73,5 @@ Setelah konfigurasi selesai, jalankan skrip menggunakan Node.js:
 
 ```bash
 node main.js
-
+```
 ---
