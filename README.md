@@ -6,9 +6,10 @@ Skrip otomatisasi ini untuk berinteraksi dengan berbagai faucet dan protokol sta
 
 * **Manajemen Multi-Dompet**: Memproses beberapa dompet dari file `privatekeys.txt`.
 * **Dukungan Proxy**: Mendukung penggunaan proksi dari file `proxies.txt` dengan rotasi proksi.
-* **Klaim Faucet Otomatis**: Mengklaim token dari berbagai faucet yang dikonfigurasi.
+* **Klaim Faucet Otomatis**: Mengklaim token dari berbagai faucet yang dikonfigurasi. 
     * ATH
     * USDe
+    * USD1
     * LULUSD
     * Ai16Z
     * Virtual
