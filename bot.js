@@ -104,6 +104,7 @@ const AZUSD_ADDRESS = "0x5966cd11aED7D68705C9692e74e5688C892cb162";
 const VANAUSD_ADDRESS = "0x46a6585a0Ad1750d37B4e6810EB59cBDf591Dc30";
 const AUSD_ADDRESS = "0x78De28aABBD5198657B26A8dc9777f441551B477";
 const VUSD_ADDRESS = "0xc14A8E2Fc341A97a57524000bF0F7F1bA4de4802";
+const USD1_ADDRESS = "0x16a8A3624465224198d216b33E825BcC3B80abf7";
 
 const ROUTER_ADDRESS_AUSD = "0x2cFDeE1d5f04dD235AEA47E1aD2fB66e3A61C13e";
 const ROUTER_ADDRESS_VUSD = "0x3dCACa90A714498624067948C092Dd0373f08265";
@@ -115,6 +116,7 @@ const STAKING_ADDRESS_VUSD = "0x5bb9Fa02a3DCCDB4E9099b48e8Ba5841D2e59d51";
 const STAKING_ADDRESS_AUSD = "0x054de909723ECda2d119E31583D40a52a332f85c";
 const STAKING_ADDRESS_LULUSD = "0x5De3fBd40D4c3892914c3b67b5B529D776A1483A";
 const STAKING_ADDRESS_USDE = "0x3988053b7c748023a1aE19a8ED4c1Bf217932bDB";
+const STAKING_ADDRESS_USD1 = "0x7799841734Ac448b8634F1c1d7522Bc8887A7bB9";
 const NAMA_NETWORK = "Arbitrum Sepolia";
 
 const ERC20ABI = [
@@ -158,10 +160,12 @@ const CONFIG_STAKING = {
   AUSD: { stakingAddress: STAKING_ADDRESS_AUSD, tokenAddress: AUSD_ADDRESS, tokenName: "AUSD", minAmount: 0.0001 },
   LULUSD: { stakingAddress: STAKING_ADDRESS_LULUSD, tokenAddress: LULUSD_ADDRESS, tokenName: "LULUSD", minAmount: 0.0001 },
   USDE: { stakingAddress: STAKING_ADDRESS_USDE, tokenAddress: USDE_ADDRESS, tokenName: "USDe", minAmount: 0.0001 },
+  USD1: { stakingAddress: STAKING_ADDRESS_USD1, tokenAddress: USD1_ADDRESS, tokenName: "USD1", minAmount: 0.0001 },
 };
 
 const FAUCET_APIS = {
   ATH: "https://app.x-network.io/maitrix-faucet/faucet",
+  USD1: "https://app.x-network.io/maitrix-usd1/faucet",
   USDe: "https://app.x-network.io/maitrix-usde/faucet",
   LULUSD: "https://app.x-network.io/maitrix-lvl/faucet",
   Ai16Z: "https://app.x-network.io/maitrix-ai16z/faucet",
@@ -236,6 +240,7 @@ async function updateTampilanWallet(wallet, provider) {
   const daftarToken = {
     ATH: ATH_ADDRESS,
     Ai16Z: AI16Z_ADDRESS,
+    USD1: USD1_ADDRESS,
     USDE: USDE_ADDRESS,
     VANA: VANA_ADDRESS,
     Virtual: VIRTUAL_ADDRESS,
