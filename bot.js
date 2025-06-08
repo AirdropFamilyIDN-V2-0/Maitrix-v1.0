@@ -1,3 +1,4 @@
+
 import fs from "fs";
 import { ethers } from "ethers";
 import axios from "axios";
@@ -33,14 +34,14 @@ const HEADER_KEREN = `
 ██║╚██╔╝██║██╔══██║██║   ██║   ██╔══██╗██║ ██╔██╗ 
 ██║ ╚═╝ ██║██║  ██║██║   ██║   ██║  ██║██║██╔╝╚██╗
 ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝
-                                @ADFMIDNVIP - v2.0
+                                @ADFMIDNVIP - v2.1
 `;
 
-// File config
+
 const FILE_PRIVATE_KEY = "privatekeys.txt";
 const FILE_PROXY = "proxies.txt";
 
-// Load wallet dan proxy
+
 let wallets = [];
 let proxies = [];
 
@@ -70,7 +71,7 @@ try {
   console.error(`⚠ Peringatan: Gak bisa baca ${FILE_PROXY}. Bakal jalan tanpa proxy.`);
 }
 
-// Logic ganti-ganti proxy
+
 let indexProxySekarang = 0;
 
 function ambilProxyBerikutnya() {
@@ -105,11 +106,14 @@ const VANAUSD_ADDRESS = "0x46a6585a0Ad1750d37B4e6810EB59cBDf591Dc30";
 const AUSD_ADDRESS = "0x78De28aABBD5198657B26A8dc9777f441551B477";
 const VUSD_ADDRESS = "0xc14A8E2Fc341A97a57524000bF0F7F1bA4de4802";
 const USD1_ADDRESS = "0x16a8A3624465224198d216b33E825BcC3B80abf7";
+const OG_ADDRESS = "0xFBBDAb7684A4Da0CFAE67C5c13fA73402008953e";
+const OUSD_ADDRESS = "0xD23016Fd7154d9A6F2830Bfb4eA3F3106AAE0E88";
 
 const ROUTER_ADDRESS_AUSD = "0x2cFDeE1d5f04dD235AEA47E1aD2fB66e3A61C13e";
 const ROUTER_ADDRESS_VUSD = "0x3dCACa90A714498624067948C092Dd0373f08265";
 const ROUTER_ADDRESS_AZUSD = "0xB0b53d8B4ef06F9Bbe5db624113C6A5D35bB7522";
 const ROUTER_ADDRESS_VANAUSD = "0xEfbAE3A68b17a61f21C7809Edfa8Aa3CA7B2546f";
+const ROUTER_ADDRESS_OUSD = "0x0b4301877A981e7808A8F4B6E277C376960C7641";
 const STAKING_ADDRESS_AZUSD = "0xf45Fde3F484C44CC35Bdc2A7fCA3DDDe0C8f252E";
 const STAKING_ADDRESS_VANAUSD = "0x2608A88219BFB34519f635Dd9Ca2Ae971539ca60";
 const STAKING_ADDRESS_VUSD = "0x5bb9Fa02a3DCCDB4E9099b48e8Ba5841D2e59d51";
@@ -117,6 +121,7 @@ const STAKING_ADDRESS_AUSD = "0x054de909723ECda2d119E31583D40a52a332f85c";
 const STAKING_ADDRESS_LULUSD = "0x5De3fBd40D4c3892914c3b67b5B529D776A1483A";
 const STAKING_ADDRESS_USDE = "0x3988053b7c748023a1aE19a8ED4c1Bf217932bDB";
 const STAKING_ADDRESS_USD1 = "0x7799841734Ac448b8634F1c1d7522Bc8887A7bB9";
+const STAKING_ADDRESS_OUSD = "0xF8F951DA83dAC732A2dCF207B644E493484047eB";
 const NAMA_NETWORK = "Arbitrum Sepolia";
 
 const ERC20ABI = [
@@ -151,6 +156,7 @@ const CONFIG_TOKEN = {
   VUSD: { routerAddress: ROUTER_ADDRESS_VUSD, selector: "0xa6d67510", inputTokenAddress: VIRTUAL_ADDRESS, outputTokenAddress: VUSD_ADDRESS, inputTokenName: "Virtual", minAmount: 2 },
   AZUSD: { routerAddress: ROUTER_ADDRESS_AZUSD, selector: "0xa6d67510", inputTokenAddress: AI16Z_ADDRESS, outputTokenAddress: AZUSD_ADDRESS, inputTokenName: "Ai16Z", minAmount: 5 },
   VANAUSD: { routerAddress: ROUTER_ADDRESS_VANAUSD, selector: "0xa6d67510", inputTokenAddress: VANA_ADDRESS, outputTokenAddress: VANAUSD_ADDRESS, inputTokenName: "VANA", minAmount: 0.2 },
+  OUSD: { routerAddress: ROUTER_ADDRESS_OUSD, selector: "0xa6d67510", inputTokenAddress: OG_ADDRESS, outputTokenAddress: OUSD_ADDRESS, inputTokenName: "OUSD", minAmount: 2 },
 };
 
 const CONFIG_STAKING = {
@@ -161,6 +167,7 @@ const CONFIG_STAKING = {
   LULUSD: { stakingAddress: STAKING_ADDRESS_LULUSD, tokenAddress: LULUSD_ADDRESS, tokenName: "LULUSD", minAmount: 0.0001 },
   USDE: { stakingAddress: STAKING_ADDRESS_USDE, tokenAddress: USDE_ADDRESS, tokenName: "USDe", minAmount: 0.0001 },
   USD1: { stakingAddress: STAKING_ADDRESS_USD1, tokenAddress: USD1_ADDRESS, tokenName: "USD1", minAmount: 0.0001 },
+  OUSD: { stakingAddress: STAKING_ADDRESS_OUSD, tokenAddress: OUSD_ADDRESS, tokenName: "OUSD", minAmount: 0.0001 },
 };
 
 const FAUCET_APIS = {
@@ -171,6 +178,7 @@ const FAUCET_APIS = {
   Ai16Z: "https://app.x-network.io/maitrix-ai16z/faucet",
   Virtual: "https://app.x-network.io/maitrix-virtual/faucet",
   Vana: "https://app.x-network.io/maitrix-vana/faucet",
+  OG: "https://app.x-network.io/maitrix-0g/faucet",
 };
 
 const DELAY_SEBELUM_CLAIM_FAUCET = 7000;
@@ -179,7 +187,7 @@ const DELAY_SEBELUM_STAKE = 5000;
 const DELAY_SETELAH_TRANSAKSI = 3000;
 const DELAY_ANTAR_TAHAP = 10000;
 const DELAY_GANTI_WALLET = 15000;
-const DELAY_24_JAM = 24 * 60 * 60 * 1000; // 24 jam dalam milidetik
+const DELAY_24_JAM = 24 * 60 * 60 * 1000; 
 
 let cooldownFaucet = {};
 
@@ -249,6 +257,8 @@ async function updateTampilanWallet(wallet, provider) {
     VANAUSD: VANAUSD_ADDRESS,
     AUSD: AUSD_ADDRESS,
     vUSD: VUSD_ADDRESS,
+	OG: OG_ADDRESS,
+	OUSD: OUSD_ADDRESS,
   };
   for (const [nama, alamat] of Object.entries(daftarToken)) {
     if (alamat) {
@@ -504,13 +514,12 @@ async function prosesSemuaWallet() {
 }
 
 async function main() {
-  // Tampilin Header Keren
   console.log(WARNA.BIRU_TERANG + HEADER_KEREN + WARNA.RESET);
 
   log("Bot Automation Mulai...", "SYSTEM");
   log(`Ketemu ${wallets.length} wallet dan ${proxies.length} proxy`, "SYSTEM");
 
-  // Fungsi untuk menjalankan loop setiap 24 jam
+
   const jalankanLoop = async () => {
     try {
       log("Memulai siklus 24 jam...", "SYSTEM");
@@ -521,10 +530,10 @@ async function main() {
     }
   };
 
-  // Jalankan pertama kali
+
   await jalankanLoop();
 
-  // Set interval untuk looping setiap 24 jam
+
   setInterval(jalankanLoop, DELAY_24_JAM);
 }
 
