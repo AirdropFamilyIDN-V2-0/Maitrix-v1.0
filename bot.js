@@ -4,7 +4,6 @@ import { ethers } from "ethers";
 import axios from "axios";
 import { HttpsProxyAgent } from "https-proxy-agent";
 
-// --- Warna-warni di terminal ---
 const WARNA = {
   RESET: "\x1b[0m",
   BIRU_TERANG: "\x1b[96m",
