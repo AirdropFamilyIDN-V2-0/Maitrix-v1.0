@@ -1,4 +1,3 @@
-
 import fs from "fs";
 import { ethers } from "ethers";
 import axios from "axios";
@@ -36,10 +35,8 @@ const HEADER_KEREN = `
                                 @ADFMIDNVIP - v2.1
 `;
 
-
 const FILE_PRIVATE_KEY = "privatekeys.txt";
 const FILE_PROXY = "proxies.txt";
-
 
 let wallets = [];
 let proxies = [];
@@ -69,7 +66,6 @@ try {
 } catch (error) {
   console.error(`⚠ Peringatan: Gak bisa baca ${FILE_PROXY}. Bakal jalan tanpa proxy.`);
 }
-
 
 let indexProxySekarang = 0;
 
@@ -117,7 +113,7 @@ const STAKING_ADDRESS_AZUSD = "0xf45Fde3F484C44CC35Bdc2A7fCA3DDDe0C8f252E";
 const STAKING_ADDRESS_VANAUSD = "0x2608A88219BFB34519f635Dd9Ca2Ae971539ca60";
 const STAKING_ADDRESS_VUSD = "0x5bb9Fa02a3DCCDB4E9099b48e8Ba5841D2e59d51";
 const STAKING_ADDRESS_AUSD = "0x054de909723ECda2d119E31583D40a52a332f85c";
-const STAKING_ADDRESS_LULUSD = "0x5De3fBd40D4c3892914c3b67b5B529D776A1483A";
+const STAKING_ADDRESS_LULUSD = "0x5De3fBd40D4c3892914c3b7b5B529D776A1483A";
 const STAKING_ADDRESS_USDE = "0x3988053b7c748023a1aE19a8ED4c1Bf217932bDB";
 const STAKING_ADDRESS_USD1 = "0x7799841734Ac448b8634F1c1d7522Bc8887A7bB9";
 const STAKING_ADDRESS_OUSD = "0xF8F951DA83dAC732A2dCF207B644E493484047eB";
@@ -186,7 +182,7 @@ const DELAY_SEBELUM_STAKE = 5000;
 const DELAY_SETELAH_TRANSAKSI = 3000;
 const DELAY_ANTAR_TAHAP = 10000;
 const DELAY_GANTI_WALLET = 15000;
-const DELAY_24_JAM = 24 * 60 * 60 * 1000; 
+const DELAY_24_JAM = 24 * 60 * 60 * 1000;
 
 let cooldownFaucet = {};
 
@@ -235,7 +231,7 @@ async function cekBalanceToken(alamatToken, alamatPemilik, provider) {
     return { balance, decimals, formatted: ethers.formatUnits(balance, decimals) };
   } catch (error) {
     log(`Gagal cek balance token ${potongAlamat(alamatToken)}: ${error.message}`, "ERROR", alamatPemilik);
-    return { balance: 0n, decimals: 18, formatted: "0" };
+    return { balance: BigInt(0), decimals: 18, formatted: "0" };
   }
 }
 
@@ -256,8 +252,8 @@ async function updateTampilanWallet(wallet, provider) {
     VANAUSD: VANAUSD_ADDRESS,
     AUSD: AUSD_ADDRESS,
     vUSD: VUSD_ADDRESS,
-	OG: OG_ADDRESS,
-	OUSD: OUSD_ADDRESS,
+    OG: OG_ADDRESS,
+    OUSD: OUSD_ADDRESS,
   };
   for (const [nama, alamat] of Object.entries(daftarToken)) {
     if (alamat) {
@@ -385,7 +381,7 @@ async function stakeToken(keyToken, wallet) {
   const { balance: balanceToken, decimals: decimalsToken, formatted: formattedToken } = await cekBalanceToken(config.tokenAddress, wallet.address, wallet.provider);
   const minAmountWei = ethers.parseUnits(config.minAmount.toString(), decimalsToken);
 
-  if (balanceToken < minAmountWei || balanceToken === 0n) {
+  if (balanceToken < minAmountWei || balanceToken === BigInt(0)) {
     log(`Balance ${config.tokenName} (${formattedToken}) gak cukup buat stake atau kosong (minimal ${config.minAmount}).`, "INFO", wallet.address);
     return false;
   }
@@ -518,7 +514,6 @@ async function main() {
   log("Bot Automation Mulai...", "SYSTEM");
   log(`Ketemu ${wallets.length} wallet dan ${proxies.length} proxy`, "SYSTEM");
 
-
   const jalankanLoop = async () => {
     try {
       log("Memulai siklus 24 jam...", "SYSTEM");
@@ -529,9 +524,7 @@ async function main() {
     }
   };
 
-
   await jalankanLoop();
-
 
   setInterval(jalankanLoop, DELAY_24_JAM);
 }
